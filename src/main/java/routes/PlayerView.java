@@ -25,18 +25,19 @@ public class PlayerView extends VerticalLayout
 	@PostConstruct
 	public void init() throws IOException, URISyntaxException
 	{
-		
-		Button button = new Button("back");
-		button.addClickListener(e -> button.getUI().ifPresent(ui->ui.navigate("")));
+
+		Button backButton = new Button("back");
+		backButton.addClickListener(e -> backButton.getUI().ifPresent(ui -> ui.navigate("")));
 
 		List<Player> players = PlayerPool.getAllPlayers();
 		Grid<Player> playerGrid = new Grid<>(Player.class);
 		playerGrid.setItems(players);
+		playerGrid.addItemClickListener(e -> playerGrid.getUI().ifPresent(ui -> ui.navigate(e.getItem().getName().toLowerCase() + "View")));
 
 		addClassName("centered-content");
 
-		add(button, playerGrid);
+		add(playerGrid, backButton);
 
 	}
-	
+
 }

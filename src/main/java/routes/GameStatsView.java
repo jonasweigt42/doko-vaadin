@@ -7,10 +7,10 @@ import javax.annotation.PostConstruct;
 import javax.inject.Inject;
 
 import com.doko.jonas.DataService;
-import com.vaadin.flow.component.Text;
 import com.vaadin.flow.component.button.Button;
 import com.vaadin.flow.component.dependency.CssImport;
 import com.vaadin.flow.component.html.H2;
+import com.vaadin.flow.component.html.Label;
 import com.vaadin.flow.component.orderedlayout.VerticalLayout;
 import com.vaadin.flow.router.Route;
 
@@ -32,11 +32,10 @@ public class GameStatsView extends VerticalLayout
 		Button backButton = new Button("back");
 		backButton.addClickListener(e -> backButton.getUI().ifPresent(ui -> ui.navigate("")));
 
-		Text gameCount = new Text("Games played: " + dataService.getGameCount());
-		Text soloCount = new Text("Solos played: " + dataService.getSoloCount());
-		Text averageCrorePerGame = new Text("Average Score per Game: " + dataService.getAverageScorePerGame());
-		Text overallMoneyPaid = new Text("Money payd: " + dataService.getOverallMoneyPaid() + "€");
-		
+		Label gameCount = new Label("Games played: " + dataService.getGameCount());
+		Label soloCount = new Label("Solos played: " + dataService.getSoloCount());
+		Label averageCrorePerGame = new Label("Average Score per Game: " + dataService.getAverageScorePerGame());
+		Label overallMoneyPaid = new Label("Money payd: " + dataService.getOverallMoneyPaid() + "€");
 		
 		addClassName("centered-content");
 
