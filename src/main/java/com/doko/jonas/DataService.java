@@ -14,6 +14,7 @@ import com.doko.jonas.dataTypes.Player;
 import com.doko.jonas.dataTypes.Session;
 import com.doko.jonas.fileRead.FileMapper;
 import com.vaadin.cdi.annotation.VaadinSessionScoped;
+import com.vaadin.flow.component.notification.Notification;
 
 @VaadinSessionScoped
 public class DataService
@@ -26,6 +27,7 @@ public class DataService
 		FileMapper mapper = new FileMapper();
 		List<Session> sessions = mapper.calculateSessions("/data");
 		dataCollector = new DataCollector(sessions);
+		Notification.show("Daten für " + dataCollector.getGameCount() + " Spiele geladen...");
 	}
 
 	public String getWonPercentagePerPlayer(Player player)

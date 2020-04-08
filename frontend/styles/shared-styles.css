@@ -10,3 +10,8 @@
   max-width: 350px;
 }
 
+.bottom-content {
+	position: absolute;
+	top: 80%
+}
+
