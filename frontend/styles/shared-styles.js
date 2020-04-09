@@ -14,6 +14,7 @@ $_documentContainer.innerHTML = `
 </custom-style>
 
 
+
 <custom-style>
   <style>
     html {
@@ -24,6 +25,16 @@ $_documentContainer.innerHTML = `
     }
   </style>
 </custom-style>
+
+<dom-module id="app-layout-theme" theme-for="vaadin-app-layout">
+  <template>
+    <style>
+      [part="drawer"] {
+		max-width: 150px;
+      }
+    </style>
+  </template>
+</dom-module>
 
 <dom-module id="chart" theme-for="vaadin-chart">
   <template>
@@ -66,3 +77,4 @@ $_documentContainer.innerHTML = `
 </dom-module>`;
 
 document.head.appendChild($_documentContainer.content);
+

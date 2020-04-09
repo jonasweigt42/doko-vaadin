@@ -38,7 +38,7 @@ public class MainView extends AppLayout
 	public void init() throws IOException, URISyntaxException
 	{
 		setPrimarySection(Section.DRAWER);
-		addToNavbar(true, new DrawerToggle());
+		addToNavbar(false, new DrawerToggle());
 		menu = createMenuTabs();
 		addToDrawer(menu);
 	}
