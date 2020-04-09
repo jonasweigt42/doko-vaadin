@@ -11,7 +11,6 @@ import java.util.Arrays;
 import java.util.Comparator;
 import java.util.List;
 
-import com.doko.jonas.dataCollect.PlayerPool;
 import com.doko.jonas.dataTypes.Game;
 import com.doko.jonas.dataTypes.Player;
 import com.doko.jonas.dataTypes.PlayerScore;
@@ -22,7 +21,8 @@ import com.doko.jonas.exceptions.InvalidHeaderException;
 
 public class FileMapper
 {
-
+	private List<Player> players = new ArrayList<>();
+	
 	public List<Session> calculateSessions(String folderString) throws IOException, URISyntaxException
 	{
 		List<File> files = loadFiles(folderString);
@@ -48,10 +48,10 @@ public class FileMapper
 		String firstline = csvReader.readLine();
 		String[] firstLineArray = firstline.split(",");
 		checkFirstLineArray(firstLineArray);
-		Player player1 = PlayerPool.getOrCreatePlayer(firstLineArray[1]);
-		Player player2 = PlayerPool.getOrCreatePlayer(firstLineArray[2]);
-		Player player3 = PlayerPool.getOrCreatePlayer(firstLineArray[3]);
-		Player player4 = PlayerPool.getOrCreatePlayer(firstLineArray[4]);
+		Player player1 = getOrCreatePlayer(firstLineArray[1]);
+		Player player2 = getOrCreatePlayer(firstLineArray[2]);
+		Player player3 = getOrCreatePlayer(firstLineArray[3]);
+		Player player4 = getOrCreatePlayer(firstLineArray[4]);
 
 		List<Game> gamesOfSession = extractGames(csvReader, player1, player2, player3, player4, date);
 		session.setGames(gamesOfSession);
@@ -202,6 +202,23 @@ public class FileMapper
 			return gameData[5];
 		}
 		return null;
+	}
+	
+	private Player getOrCreatePlayer(String name)
+	{
+		return players.stream().filter(p -> p.getName().equals(name)).findFirst().orElseGet(() -> createPlayer(name));
+	}
+
+	private Player createPlayer(String name)
+	{
+		Player player = new Player(name);
+		players.add(player);
+		return player;
+	}
+
+	public List<Player> getAllPlayers()
+	{
+		return players;
 	}
 
 }

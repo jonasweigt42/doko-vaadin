@@ -1,4 +1,4 @@
-package com.doko.jonas;
+package com.doko.jonas.service;
 
 import java.io.IOException;
 import java.net.URISyntaxException;
@@ -26,7 +26,8 @@ public class DataService
 	{
 		FileMapper mapper = new FileMapper();
 		List<Session> sessions = mapper.calculateSessions("/data");
-		dataCollector = new DataCollector(sessions);
+		List<Player> players = mapper.getAllPlayers();
+		dataCollector = new DataCollector(sessions, players);
 		Notification.show("Daten für " + dataCollector.getGameCount() + " Spiele geladen...");
 	}
 
@@ -83,5 +84,15 @@ public class DataService
 	public List<Game> getAllGames()
 	{
 		return dataCollector.getAllGames();
+	}
+	
+	public List<Player> getAllPlayers()
+	{
+		return dataCollector.getAllPlayers();
+	}
+	
+	public Player getPlayerByName(String playerName)
+	{
+		return dataCollector.getPlayerByName(playerName);
 	}
 }

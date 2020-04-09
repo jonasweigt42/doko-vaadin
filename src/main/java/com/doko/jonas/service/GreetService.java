@@ -1,4 +1,4 @@
-package com.doko.jonas;
+package com.doko.jonas.service;
 
 import com.vaadin.cdi.annotation.VaadinSessionScoped;
 

@@ -18,6 +18,7 @@ public class DataCollector
 {
 
 	private List<Session> sessionData;
+	private List<Player> allPlayers;
 	private int gameCount;
 	private int soloCount;
 	private int overallGameScore;
@@ -27,9 +28,10 @@ public class DataCollector
 
 	private DecimalFormat df = new DecimalFormat("0.00");
 
-	public DataCollector(List<Session> sessionData)
+	public DataCollector(List<Session> sessionData, List<Player> players)
 	{
 		this.sessionData = sessionData;
+		this.allPlayers = players;
 		collectData();
 	}
 
@@ -179,10 +181,14 @@ public class DataCollector
 		return allGames;
 	}
 
-	// TODO implement
-	public Map<Integer, String> getAverageScorePerYear()
+	public List<Player> getAllPlayers()
 	{
-		return null;
+		return allPlayers;
+	}
+	
+	public Player getPlayerByName(String playerName)
+	{
+		return allPlayers.stream().filter(p -> p.getName().equals(playerName)).findFirst().orElse(null);
 	}
 
 }
